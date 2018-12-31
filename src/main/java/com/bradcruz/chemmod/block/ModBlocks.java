@@ -11,18 +11,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModBlocks {
     public static BlockBase oreCopper = new BlockBase("ore_copper", Material.ROCK);
 
+    public static BlockChemTable chemTable = new BlockChemTable();
+
 
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(oreCopper);
+        event.getRegistry().registerAll(oreCopper,
+                                        chemTable
+                                        );
     }
 
     public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new ItemBlock(oreCopper).setRegistryName(oreCopper.getRegistryName()));
+        event.getRegistry().registerAll(new ItemBlock(oreCopper).setRegistryName(oreCopper.getRegistryName()),
+                                        new ItemBlock(chemTable).setRegistryName(chemTable.getRegistryName())
+                                        );
     }
 
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         oreCopper.initModel();
+        chemTable.initModel();
     }
 }

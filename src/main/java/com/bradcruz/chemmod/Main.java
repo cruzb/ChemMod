@@ -1,5 +1,6 @@
 package com.bradcruz.chemmod;
 
+import com.bradcruz.chemmod.client.CreativeTab;
 import com.bradcruz.chemmod.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -19,6 +20,8 @@ public class Main {
     @SidedProxy(clientSide = "com.bradcruz.chemmod.proxy.ClientProxy", serverSide = "com.bradcruz.chemmod.proxy.ServerProxy")
     public static CommonProxy proxy;
 
+    public static final CreativeTab creativeTab = new CreativeTab();
+
     @Mod.Instance
     public static Main instance;
 
@@ -27,7 +30,7 @@ public class Main {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
      //   logger = event.getModLog();
-        proxy.preInit(event);
+        proxy.preInit(event);System.out.println("HddEY");System.out.println("HffdEY");System.out.println("HdfdEY");System.out.println("HEYfdf");
     }
 
     @Mod.EventHandler

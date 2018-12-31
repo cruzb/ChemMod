@@ -54,9 +54,9 @@ public class ItemChemBuffout extends ItemBase {
     private void DoChemEffect(EntityPlayer player) {
         //buffout does +2 str +2 endr +50 hp
         player.addPotionEffect(new PotionEffect(MobEffects.STRENGTH, 6000, 2));
-        player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 1));
+        player.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 6000, 1));
         player.addPotionEffect(new PotionEffect(MobEffects.HEALTH_BOOST, 10));
-        player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 10, 0));
+        player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 150, 0));
     }
 
 

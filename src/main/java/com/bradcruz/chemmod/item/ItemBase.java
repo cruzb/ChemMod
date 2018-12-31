@@ -17,7 +17,7 @@ public class ItemBase extends Item {
 
         setUnlocalizedName(Main.MODPREFIX + name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabs.MISC);
+        setCreativeTab(Main.creativeTab);
     }
 
     @SideOnly(Side.CLIENT)

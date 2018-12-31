@@ -3,7 +3,6 @@ package com.bradcruz.chemmod.item.chem;
 import com.bradcruz.chemmod.item.ItemBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
@@ -13,7 +12,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.sound.SoundEvent;
 
-public class ItemChemMedx extends ItemBase {
+public class ItemChemNukacola extends ItemBase {
 
     private String name;
     private SoundEvent sound;
@@ -24,7 +23,7 @@ public class ItemChemMedx extends ItemBase {
 
 
 
-    public ItemChemMedx(String name) {
+    public ItemChemNukacola(String name) {
         super(name);
         this.name = name;
 
@@ -52,13 +51,8 @@ public class ItemChemMedx extends ItemBase {
     }
 
     private void DoChemEffect(EntityPlayer player, ItemStack itemstack) {
-        //med-x does +25 dmg resist +250 poison resist
-        //player.curePotionEffects(itemstack);
-        player.addPotionEffect(new PotionEffect(MobEffects.ABSORPTION, 6000, 2));
-        player.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 150, 3));
-
-
+        //nukacola does +2 hp/s +1 bottle cap + 3 rad
+        player.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, 6000, 1));
+        player.addPotionEffect(new PotionEffect(MobEffects.SPEED, 6000, 0));
     }
-
-
 }

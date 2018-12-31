@@ -20,7 +20,7 @@ public class BlockBase extends Block {
 
         setUnlocalizedName(Main.MODPREFIX + name);
         setRegistryName(name);
-        setCreativeTab(CreativeTabs.MATERIALS);
+        setCreativeTab(Main.creativeTab);
     }
 
     @SideOnly(Side.CLIENT)
