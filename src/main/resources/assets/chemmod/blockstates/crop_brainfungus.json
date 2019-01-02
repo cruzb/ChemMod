@@ -1,0 +1,50 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "cross"
+	},
+	"variants": {
+		"age": {
+			"0": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/0"
+				}
+			},
+			"1": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/1"
+				}
+			},
+			"2": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/2"
+				}
+			},
+			"3": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/3"
+				}
+			},
+			"4": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/4"
+				}
+			},
+			"5": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/5"
+				}
+			},
+			"6": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/6"
+				}
+			},
+			"7": {
+				"textures": {
+					"cross": "chemmod:blocks/crop_brainfungus/7"
+				}
+			}
+		}
+	}
+}

@@ -1,19 +1,32 @@
 package com.bradcruz.chemmod.item;
 
 import com.bradcruz.chemmod.item.chem.*;
+import com.bradcruz.chemmod.item.component.ItemAcid;
+import com.bradcruz.chemmod.item.crop.ItemBrainfungus;
+import com.bradcruz.chemmod.item.crop.ItemHubflower;
+import com.bradcruz.chemmod.item.crop.ItemSeedBrainfungus;
+import com.bradcruz.chemmod.item.crop.ItemSeedHubflower;
 import net.minecraft.item.Item;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.registries.IForgeRegistry;
 
 
 public class ModItems {
+    //
+    public static final ItemBase ingotCopper = new ItemBase("ingot_copper");
 
-    public static ItemBase ingotCopper = new ItemBase("ingot_copper");
+    //////crops
+    public static ItemHubflower hubflower = new ItemHubflower("hubflower");
+    public static ItemSeedHubflower seedHubflower = new ItemSeedHubflower("seed_hubflower");
+    //
+    public static ItemBrainfungus brainFungus = new ItemBrainfungus("brainfungus");
+    public static ItemSeedBrainfungus seedBrainFungus = new ItemSeedBrainfungus("seed_brainfungus");
+
+
+    //components
+    public static ItemAcid  acid = new ItemAcid("acid");
+
 
     public static ItemChemBuffout buffout = new ItemChemBuffout("chem_buffout");
     public static ItemChemJet jet = new ItemChemJet("chem_jet");
@@ -24,6 +37,14 @@ public class ModItems {
 
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().registerAll(ingotCopper,
+                                        //crops
+                                        hubflower,
+                                        seedHubflower,
+                                        brainFungus,
+                                        seedBrainFungus,
+                                        //component
+                                        acid,
+                                        //chems
                                         buffout,
                                         jet,
                                         medx,
@@ -37,6 +58,14 @@ public class ModItems {
     @SideOnly(Side.CLIENT)
     public static void initModels() {
         ingotCopper.initModel();
+        //
+        hubflower.initModel();
+        seedHubflower.initModel();
+        brainFungus.initModel();
+        seedBrainFungus.initModel();
+        //
+        acid.initModel();
+        //
         buffout.initModel();
         jet.initModel();
         medx.initModel();
