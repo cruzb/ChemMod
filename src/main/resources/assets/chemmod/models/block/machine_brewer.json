@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_directional",
+  "textures": {
+    "particle": "chemmod:blocks/machine_core",
+    "down": "chemmod:blocks/machine_core",
+    "up": "chemmod:blocks/machine_core",
+    "east": "chemmod:blocks/machine_core",
+    "west": "chemmod:blocks/machine_core",
+    "north": "#front",
+    "south": "chemmod:blocks/machine_core"
+  }
+}

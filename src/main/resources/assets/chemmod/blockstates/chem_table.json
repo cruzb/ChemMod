@@ -2,13 +2,14 @@
 	"forge_marker": 1,
 	"defaults":
 	{
-		"model": "chemmod:chem_table"
+		"model": "chemmod:machine_mixer"
 	},
 	"variants":
 	{
 		"inventory": {
 			"model": "chemmod:chem_table",
 			"transform": "forge:default-block"
+			}
 		},
 		"normal":[{}],
 		"facing": {

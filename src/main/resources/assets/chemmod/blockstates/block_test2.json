@@ -1,0 +1,16 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"textures": {
+			"all": "chemmod:blocks/machine_centrifuge"
+		}
+	},
+	"variants": {
+		"normal": {
+			"model": "cube_all"
+		},
+		"inventory": {
+			"model": "cube_all"
+		}
+	}
+}
