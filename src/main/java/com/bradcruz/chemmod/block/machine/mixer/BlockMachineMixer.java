@@ -1,10 +1,10 @@
-package com.bradcruz.chemmod.block.machine.brewer;
+package com.bradcruz.chemmod.block.machine.mixer;
 
 import com.bradcruz.chemmod.Main;
 import com.bradcruz.chemmod.ModGUIs;
 import com.bradcruz.chemmod.block.BlockBase;
 import com.bradcruz.chemmod.block.ModBlocks;
-import net.minecraft.block.ITileEntityProvider;
+import com.bradcruz.chemmod.block.machine.brewer.TileEntityMachineBrewer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -19,21 +19,16 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
-
-public class BlockMachineBrewer extends BlockBase {
+public class BlockMachineMixer extends BlockBase {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
     public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
-    public BlockMachineBrewer(String name) {
+    public BlockMachineMixer(String name) {
         super(name, Material.IRON);
         setSoundType(SoundType.METAL);
         setHardness(5f);
@@ -85,7 +80,12 @@ public class BlockMachineBrewer extends BlockBase {
 
 
     //GUI stuff
-
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if(!world.isRemote)
+            player.openGui(Main.instance, ModGUIs.GUI_MIXER, world, pos.getX(), pos.getY(), pos.getZ());
+        return true;
+    }
 
     //Tile Enitty Stuff
     @Override
@@ -95,7 +95,7 @@ public class BlockMachineBrewer extends BlockBase {
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityMachineBrewer();
+        return new TileEntityMachineMixer();
     }
 
     public static void setState(boolean active, World world, BlockPos pos) {
@@ -103,11 +103,11 @@ public class BlockMachineBrewer extends BlockBase {
         TileEntity tileEntity = world.getTileEntity(pos);
 
         if(active) world.setBlockState(pos, ModBlocks.brewer.getDefaultState()
-                                                            .withProperty(FACING, state.getValue(FACING))
-                                                            .withProperty(ACTIVE, true), 3);
+                .withProperty(FACING, state.getValue(FACING))
+                .withProperty(ACTIVE, true), 3);
         else world.setBlockState(pos, ModBlocks.brewer.getDefaultState()
-                                                        .withProperty(FACING, state.getValue(FACING))
-                                                        .withProperty(ACTIVE, false), 3);
+                .withProperty(FACING, state.getValue(FACING))
+                .withProperty(ACTIVE, false), 3);
 
         if(tileEntity != null) {
             tileEntity.validate();

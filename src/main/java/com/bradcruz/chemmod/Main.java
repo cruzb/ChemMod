@@ -3,6 +3,7 @@ package com.bradcruz.chemmod;
 import com.bradcruz.chemmod.client.CreativeTab;
 import com.bradcruz.chemmod.proxy.CommonProxy;
 import com.bradcruz.chemmod.recipe.ModRecipes;
+import com.bradcruz.chemmod.util.RegistryHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -32,16 +33,19 @@ public class Main {
     public void preInit(FMLPreInitializationEvent event) {
      //   logger = event.getModLog();
         proxy.preInit(event);System.out.println("HddEY");System.out.println("HffdEY");System.out.println("HdfdEY");System.out.println("HEYfdf");
+        RegistryHandler.preinit();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent e) {
         proxy.init(e);
         ModRecipes.init();
+        RegistryHandler.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent e) {
         proxy.postInit(e);
+        RegistryHandler.postinit();
     }
 }
