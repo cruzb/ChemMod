@@ -97,7 +97,9 @@ public class TileEntityMachineBoiler extends TileEntity implements ITickable {
             --this.burnTime;
             BlockMachineBoiler.setState(true, world, pos);
         }
-        //else BlockMachineBoiler.setState(false, world, pos);
+        else if (!this.isActive() && !world.isRemote) {
+            BlockMachineBoiler.setState(false, world, pos);
+        }
 
         ItemStack[] inputs = new ItemStack[] {handler.getStackInSlot(0), handler.getStackInSlot(1)};
         ItemStack fuel = this.handler.getStackInSlot(2);
@@ -152,6 +154,7 @@ public class TileEntityMachineBoiler extends TileEntity implements ITickable {
             else if(this.isActive() && !this.canSmelt()) {
                 cookTime = 0;
             }
+
         }
     }
 
