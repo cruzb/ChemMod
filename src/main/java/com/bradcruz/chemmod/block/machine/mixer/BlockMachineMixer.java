@@ -101,8 +101,7 @@ public class BlockMachineMixer extends BlockBase {
         IBlockState state = world.getBlockState(pos);
         TileEntity tileEntity = world.getTileEntity(pos);
 
-        //add light here
-
+        //add light here?
 
         if(active) {
             world.setBlockState(pos, ModBlocks.mixer.getDefaultState()
@@ -121,29 +120,4 @@ public class BlockMachineMixer extends BlockBase {
             world.setTileEntity(pos, tileEntity);
         }
     }
-/*
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
-
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state)
-    {
-        return EnumBlockRenderType.MODEL;
-    }
-
-    @Override
-    public IBlockState withRotation(IBlockState state, Rotation rot)
-    {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
-    }
-
-    @Override
-    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
-    {
-        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
-    }
-*/
 }

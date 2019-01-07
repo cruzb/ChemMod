@@ -39,12 +39,7 @@ public class ContainerMachineMixer extends Container {
             this.addSlotToContainer(new Slot(player, x, 8 + x*18, 142));
         }
     }
-/*
-    @Override
-    public void addListener(IContainerListener listener) {
-        super.addListener(listener);
-        listener.sendAllWindowProperties(this, this.tileEntity);
-    }*/
+
 
     @Override
     public void detectAndSendChanges() {
