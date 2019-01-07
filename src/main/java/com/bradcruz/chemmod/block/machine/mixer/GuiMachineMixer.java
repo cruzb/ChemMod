@@ -39,7 +39,7 @@ public class GuiMachineMixer extends GuiContainer {
         }
 
         int l = this.getCookProgressScaled(40);
-        this.drawTexturedModalRect(this.guiLeft + 62, this.guiTop + 34, 176, 14, l + 1, 16);
+        this.drawTexturedModalRect(this.guiLeft + 61, this.guiTop + 35, 176, 14, l + 1, 16);
 
     }
 

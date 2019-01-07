@@ -18,9 +18,12 @@
 	  "down": {}
     },
     "active": {
-      "false": {},
+      "false": {
+	  },
       "true": {
-		"front": "chemmod:blocks/machine_mixer"
+		"textures": {
+		  "front": "chemmod:blocks/machine_mixer"
+		}
       }
     }
   }

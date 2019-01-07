@@ -4,7 +4,6 @@ import com.bradcruz.chemmod.Main;
 import com.bradcruz.chemmod.ModGUIs;
 import com.bradcruz.chemmod.block.BlockBase;
 import com.bradcruz.chemmod.block.ModBlocks;
-import com.bradcruz.chemmod.block.machine.brewer.TileEntityMachineBrewer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -16,8 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -34,7 +32,7 @@ public class BlockMachineMixer extends BlockBase {
         setHardness(5f);
         setResistance(30f);
 
-        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, false));
 
     }
 
@@ -54,6 +52,7 @@ public class BlockMachineMixer extends BlockBase {
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         world.setBlockState(pos, state.withProperty(FACING, getFacingFromEntity(pos, placer)), 2);
+        //world.setBlockState(pos, this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 2);
     }
 
     public static EnumFacing getFacingFromEntity(BlockPos clickedBlock, EntityLivingBase entity) {
@@ -102,19 +101,49 @@ public class BlockMachineMixer extends BlockBase {
         IBlockState state = world.getBlockState(pos);
         TileEntity tileEntity = world.getTileEntity(pos);
 
-        if(active) world.setBlockState(pos, ModBlocks.brewer.getDefaultState()
-                .withProperty(FACING, state.getValue(FACING))
-                .withProperty(ACTIVE, true), 3);
-        else world.setBlockState(pos, ModBlocks.brewer.getDefaultState()
-                .withProperty(FACING, state.getValue(FACING))
-                .withProperty(ACTIVE, false), 3);
+        //add light here
+
+
+        if(active) {
+            world.setBlockState(pos, ModBlocks.mixer.getDefaultState()
+                    .withProperty(FACING, state.getValue(FACING))
+                    .withProperty(ACTIVE, true), 3);
+        }
+        else {
+            world.setBlockState(pos, ModBlocks.mixer.getDefaultState()
+                    .withProperty(FACING, state.getValue(FACING))
+                    .withProperty(ACTIVE, false), 3);
+        }
+        System.out.println(world.getBlockState(pos));
 
         if(tileEntity != null) {
             tileEntity.validate();
             world.setTileEntity(pos, tileEntity);
         }
     }
+/*
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    }
 
 
+    @Override
+    public EnumBlockRenderType getRenderType(IBlockState state)
+    {
+        return EnumBlockRenderType.MODEL;
+    }
 
+    @Override
+    public IBlockState withRotation(IBlockState state, Rotation rot)
+    {
+        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
+    }
+
+    @Override
+    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
+    {
+        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
+    }
+*/
 }

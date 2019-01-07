@@ -11,6 +11,10 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
+
 
 public class ContainerMachineMixer extends Container {
     private final TileEntityMachineMixer tileEntity;
@@ -18,12 +22,14 @@ public class ContainerMachineMixer extends Container {
 
     public ContainerMachineMixer(InventoryPlayer player, TileEntityMachineMixer tileEntity) {
         this.tileEntity = tileEntity;
+        IItemHandler handler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        this.addSlotToContainer(new Slot(tileEntity, 0, 56, 17));
-        this.addSlotToContainer(new Slot(tileEntity, 1, 56, 53));
-        this.addSlotToContainer(new SlotMachineMixerFuel(tileEntity, 2, 33, 35));
-        this.addSlotToContainer(new SlotMachineMixerOutput(player.player, tileEntity, 3, 115, 35));
+        this.addSlotToContainer(new SlotItemHandler(handler, 0, 56, 17));
+        this.addSlotToContainer(new SlotItemHandler(handler, 1, 56, 53));
+        this.addSlotToContainer(new SlotItemHandler(handler, 2, 33, 35));
+        this.addSlotToContainer(new SlotItemHandler(handler, 3, 116, 35));
 
+        //inventory
         for(int y = 0; y < 3; y++) {
             for(int x = 0 ; x < 9; x++) {
                 this.addSlotToContainer(new Slot(player, 9 + x + y*9, 8 + x*18, 84 + y*18));
@@ -33,19 +39,19 @@ public class ContainerMachineMixer extends Container {
             this.addSlotToContainer(new Slot(player, x, 8 + x*18, 142));
         }
     }
-
+/*
     @Override
     public void addListener(IContainerListener listener) {
         super.addListener(listener);
         listener.sendAllWindowProperties(this, this.tileEntity);
-    }
+    }*/
 
     @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
         for(int i = 0; i < this.listeners.size(); i++) {
-            IContainerListener listener = (IContainerListener)this.listeners.get(i);
+            IContainerListener listener = this.listeners.get(i);
 
             if(this.cookTime != this.tileEntity.getField(2))
                 listener.sendWindowProperty(this, 2, this.tileEntity.getField(2));
