@@ -3,7 +3,7 @@
   "defaults": {
     "model": "chemmod:machine",
 	"textures": {
-		"front": "chemmod:blocks/machine_mixer_off"
+		"front": "chemmod:blocks/machine_boiler_off"
 	}
   },
   "variants": {
@@ -22,7 +22,7 @@
 	  },
       "true": {
 		"textures": {
-		  "front": "chemmod:blocks/machine_mixer"
+		  "front": "chemmod:blocks/machine_boiler"
 		}
       }
     }

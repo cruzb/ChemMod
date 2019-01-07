@@ -1,5 +1,4 @@
-package com.bradcruz.chemmod.block.machine.mixer;
-
+package com.bradcruz.chemmod.block.machine.boiler;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -13,12 +12,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-
-public class ContainerMachineMixer extends Container {
-    private final TileEntityMachineMixer tileEntity;
+public class ContainerMachineBoiler extends Container {
+    private final TileEntityMachineBoiler tileEntity;
     private int cookTime, totalCooktime, burnTime, currentBurntime;
 
-    public ContainerMachineMixer(InventoryPlayer player, TileEntityMachineMixer tileEntity) {
+    public ContainerMachineBoiler(InventoryPlayer player, TileEntityMachineBoiler tileEntity) {
         this.tileEntity = tileEntity;
         IItemHandler handler = tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
@@ -89,15 +87,15 @@ public class ContainerMachineMixer extends Container {
             }
             else if(index != 2 && index != 1 && index != 0) {
                 Slot slot1 = this.inventorySlots.get(index + 1);
-                if(!RecipesMachineMixer.getInstance().getMachineMixerResult(stack1, slot1.getStack()).isEmpty()) {
+                if(!RecipesMachineBoiler.getInstance().getMachineBoilerResult(stack1, slot1.getStack()).isEmpty()) {
                     if(!this.mergeItemStack(stack1, 0, 2, false))
                         return ItemStack.EMPTY;
-                    else if(TileEntityMachineMixer.isItemFuel(stack1))
+                    else if(TileEntityMachineBoiler.isItemFuel(stack1))
                         if(!this.mergeItemStack(stack1, 2, 3, false)) return ItemStack.EMPTY;
-                    else if(index >= 4 && index < 31)
-                        if(!this.mergeItemStack(stack1, 31, 40, false)) return ItemStack.EMPTY;
-                    else if(index >= 31 && index < 40 && !this.mergeItemStack(stack1, 4, 31, false))
-                        return ItemStack.EMPTY;
+                        else if(index >= 4 && index < 31)
+                            if(!this.mergeItemStack(stack1, 31, 40, false)) return ItemStack.EMPTY;
+                            else if(index >= 31 && index < 40 && !this.mergeItemStack(stack1, 4, 31, false))
+                                return ItemStack.EMPTY;
                 }
             }
             else if(!this.mergeItemStack(stack1, 4, 40, false))

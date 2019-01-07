@@ -1,10 +1,7 @@
-package com.bradcruz.chemmod.block.machine.brewer;
+package com.bradcruz.chemmod.block.machine;
 
-import com.bradcruz.chemmod.Main;
-import com.bradcruz.chemmod.ModGUIs;
 import com.bradcruz.chemmod.block.BlockBase;
-import com.bradcruz.chemmod.block.ModBlocks;
-import net.minecraft.block.ITileEntityProvider;
+import com.bradcruz.chemmod.block.machine.mixer.BlockMachineMixer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -12,35 +9,27 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
-
-public class BlockMachineBrewer extends BlockBase {
+public class BlockMachineBase extends BlockBase {
 
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
     public static final PropertyBool ACTIVE = PropertyBool.create("active");
 
-    public BlockMachineBrewer(String name) {
-        super(name, Material.IRON);
+    public BlockMachineBase(String name, Material material) {
+        super(name, material);
+
         setSoundType(SoundType.METAL);
         setHardness(5f);
         setResistance(30f);
 
-        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
-
+        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(ACTIVE, false));
     }
 
     @Override
@@ -52,9 +41,6 @@ public class BlockMachineBrewer extends BlockBase {
     public ItemStack getItem(World world, BlockPos pos, IBlockState state) {
         return new ItemStack(this);
     }
-
-
-
 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
@@ -82,39 +68,6 @@ public class BlockMachineBrewer extends BlockBase {
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, FACING, ACTIVE);
     }
-
-
-    //GUI stuff
-
-
-    //Tile Enitty Stuff
-    @Override
-    public boolean hasTileEntity(IBlockState state) {
-        return true;
-    }
-
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityMachineBrewer();
-    }
-
-    public static void setState(boolean active, World world, BlockPos pos) {
-        IBlockState state = world.getBlockState(pos);
-        TileEntity tileEntity = world.getTileEntity(pos);
-
-        if(active) world.setBlockState(pos, ModBlocks.brewer.getDefaultState()
-                                                            .withProperty(FACING, state.getValue(FACING))
-                                                            .withProperty(ACTIVE, true), 3);
-        else world.setBlockState(pos, ModBlocks.brewer.getDefaultState()
-                                                        .withProperty(FACING, state.getValue(FACING))
-                                                        .withProperty(ACTIVE, false), 3);
-
-        if(tileEntity != null) {
-            tileEntity.validate();
-            world.setTileEntity(pos, tileEntity);
-        }
-    }
-
 
 
 }

@@ -2,6 +2,7 @@ package com.bradcruz.chemmod.item;
 
 import com.bradcruz.chemmod.item.chem.*;
 import com.bradcruz.chemmod.item.component.ItemAcid;
+import com.bradcruz.chemmod.item.component.ItemBlood;
 import com.bradcruz.chemmod.item.crop.ItemBrainfungus;
 import com.bradcruz.chemmod.item.crop.ItemHubflower;
 import com.bradcruz.chemmod.item.crop.ItemSeedBrainfungus;
@@ -25,7 +26,8 @@ public class ModItems {
 
 
     //components
-    public static ItemAcid  acid = new ItemAcid("acid");
+    public static ItemAcid acid = new ItemAcid("acid");
+    public static ItemBlood blood = new ItemBlood("blood");
 
 
     public static ItemChemBuffout buffout = new ItemChemBuffout("chem_buffout");
@@ -44,6 +46,7 @@ public class ModItems {
                                         seedBrainFungus,
                                         //component
                                         acid,
+                                        blood,
                                         //chems
                                         buffout,
                                         jet,
@@ -65,6 +68,7 @@ public class ModItems {
         seedBrainFungus.initModel();
         //
         acid.initModel();
+        blood.initModel();
         //
         buffout.initModel();
         jet.initModel();
