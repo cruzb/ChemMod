@@ -45,16 +45,16 @@ public class BlockMachineBoiler extends BlockMachineBase {
 
         //add light here?
 
-        if(active) {
+        /*if(active) {
             world.setBlockState(pos, ModBlocks.boiler.getDefaultState()
                     .withProperty(FACING, state.getValue(FACING))
                     .withProperty(ACTIVE, true), 3);
         }
-        else {
+        else {*/
             world.setBlockState(pos, ModBlocks.boiler.getDefaultState()
                     .withProperty(FACING, state.getValue(FACING))
-                    .withProperty(ACTIVE, false), 3);
-        }
+                    .withProperty(ACTIVE, active), 3);
+        //}
 
         if(tileEntity != null) {
             tileEntity.validate();

@@ -94,6 +94,7 @@ public class TileEntityMachineMixer extends TileEntity implements ITickable {
             --this.burnTime;
             BlockMachineMixer.setState(true, world, pos);
         }
+        //else BlockMachineMixer.setState(false, world, pos);
 
         ItemStack[] inputs = new ItemStack[] {handler.getStackInSlot(0), handler.getStackInSlot(1)};
         ItemStack fuel = this.handler.getStackInSlot(2);

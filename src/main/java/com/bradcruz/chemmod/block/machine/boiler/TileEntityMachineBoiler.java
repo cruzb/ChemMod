@@ -1,6 +1,7 @@
 package com.bradcruz.chemmod.block.machine.boiler;
 
 
+import com.bradcruz.chemmod.block.machine.mixer.BlockMachineMixer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -96,6 +97,7 @@ public class TileEntityMachineBoiler extends TileEntity implements ITickable {
             --this.burnTime;
             BlockMachineBoiler.setState(true, world, pos);
         }
+        //else BlockMachineBoiler.setState(false, world, pos);
 
         ItemStack[] inputs = new ItemStack[] {handler.getStackInSlot(0), handler.getStackInSlot(1)};
         ItemStack fuel = this.handler.getStackInSlot(2);

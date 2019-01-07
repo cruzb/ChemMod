@@ -51,16 +51,16 @@ public class BlockMachineMixer extends BlockMachineBase {
 
         //add light here?
 
-        if(active) {
+        /*if(active) {
             world.setBlockState(pos, ModBlocks.mixer.getDefaultState()
                     .withProperty(FACING, state.getValue(FACING))
                     .withProperty(ACTIVE, true), 3);
         }
-        else {
+        else {*/
             world.setBlockState(pos, ModBlocks.mixer.getDefaultState()
                     .withProperty(FACING, state.getValue(FACING))
-                    .withProperty(ACTIVE, false), 3);
-        }
+                    .withProperty(ACTIVE, active), 3);
+       // }
 
         if(tileEntity != null) {
             tileEntity.validate();
