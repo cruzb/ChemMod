@@ -39,6 +39,7 @@ public class BlockMachineBoiler extends BlockMachineBase {
         return new TileEntityMachineBoiler();
     }
 
+
     public static void setState(boolean active, World world, BlockPos pos) {
         IBlockState state = world.getBlockState(pos);
         TileEntity tileEntity = world.getTileEntity(pos);

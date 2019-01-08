@@ -87,7 +87,7 @@ public class ContainerMachineBoiler extends Container {
             }
             else if(index != 2 && index != 1 && index != 0) {
                 Slot slot1 = this.inventorySlots.get(index + 1);
-                if(!RecipesMachineBoiler.getInstance().getMachineBoilerResult(stack1, slot1.getStack()).isEmpty()) {
+                if(!RecipesMachineBoiler.getInstance().getResult(stack1, slot1.getStack()).isEmpty()) {
                     if(!this.mergeItemStack(stack1, 0, 2, false))
                         return ItemStack.EMPTY;
                     else if(TileEntityMachineBoiler.isItemFuel(stack1))

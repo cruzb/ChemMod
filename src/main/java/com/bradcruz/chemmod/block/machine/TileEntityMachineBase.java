@@ -1,6 +1,8 @@
 package com.bradcruz.chemmod.block.machine;
 
+import com.bradcruz.chemmod.block.machine.mixer.TileEntityMachineMixer;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -11,14 +13,42 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityMachineBase extends TileEntity {
 
-    /*private int burnTime;
-    private int currentBurnTime;
-    private int cookTime;
-    private int totalCookTime = 200;
+    protected ItemStackHandler handler = new ItemStackHandler(4);
+    protected String customName;
+    protected ItemStack smelting = ItemStack.EMPTY;
+
+    protected int burnTime;
+    protected int currentBurnTime;
+    protected int cookTime;
+    protected int totalCookTime = 200;
+
+    public boolean hasCustomName() {
+        return this.customName != null && !this.customName.isEmpty();
+    }
+
+    public void setCustomName(String customName) {
+        this.customName = customName;
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return true;
+        else return false;
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+        if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) return (T) this.handler;
+        return super.getCapability(capability, facing);
+    }
+
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
@@ -43,6 +73,7 @@ public class TileEntityMachineBase extends TileEntity {
         if(this.hasCustomName()) compound.setString("CustomName", this.customName);
         return compound;
     }
+
     public static int getItemBurnTime(ItemStack fuel) {
         if(fuel.isEmpty()) return 0;
         else {
@@ -58,6 +89,24 @@ public class TileEntityMachineBase extends TileEntity {
             return GameRegistry.getFuelValue(fuel);
         }
     }
+
+    public static boolean isItemFuel(ItemStack fuel) {
+        return getItemBurnTime(fuel) > 0;
+    }
+
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return this.world.getTileEntity(this.pos) != this ? false : player.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
+    }
+
+    public boolean isActive() {
+        return this.burnTime > 0;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static boolean isActive(TileEntityMachineBase te) {
+        return te.getField(0) > 0;
+    }
+
 
     public int getField(int id) {
         switch(id) {
@@ -88,5 +137,5 @@ public class TileEntityMachineBase extends TileEntity {
             case 3:
                 this.totalCookTime = value;
         }
-    }*/
+    }
 }

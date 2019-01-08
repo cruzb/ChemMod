@@ -1,9 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "chemmod:machine_brewer",
+    "model": "chemmod:machine_centrifuge",
 	"textures": {
-		"front": "chemmod:blocks/machine_brewer_off"
+		"side": "chemmod:blocks/machine_centrifuge_side_off",
+		"top": "chemmod:blocks/machine_centrifuge_top_off"
 	}
   },
   "variants": {
@@ -18,9 +19,13 @@
 	  "down": {}
     },
     "active": {
-      "false": {},
+      "false": {
+	  },
       "true": {
-		"front": "chemmod:blocks/machine_brewer"
+		"textures": {
+		  "side": "chemmod:blocks/machine_centrifuge_side",
+		"top": "chemmod:blocks/machine_centrifuge_top"
+		}
       }
     }
   }

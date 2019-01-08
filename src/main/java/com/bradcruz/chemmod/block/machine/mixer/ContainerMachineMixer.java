@@ -89,7 +89,7 @@ public class ContainerMachineMixer extends Container {
             }
             else if(index != 2 && index != 1 && index != 0) {
                 Slot slot1 = this.inventorySlots.get(index + 1);
-                if(!RecipesMachineMixer.getInstance().getMachineMixerResult(stack1, slot1.getStack()).isEmpty()) {
+                if(!RecipesMachineMixer.getInstance().getResult(stack1, slot1.getStack()).isEmpty()) {
                     if(!this.mergeItemStack(stack1, 0, 2, false))
                         return ItemStack.EMPTY;
                     else if(TileEntityMachineMixer.isItemFuel(stack1))
