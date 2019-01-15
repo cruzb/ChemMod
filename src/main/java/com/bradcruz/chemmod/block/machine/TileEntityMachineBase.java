@@ -86,7 +86,7 @@ public class TileEntityMachineBase extends TileEntity {
             }
             if (item == Items.COAL) return 800;
 
-            return GameRegistry.getFuelValue(fuel);
+            return 0;
         }
     }
 

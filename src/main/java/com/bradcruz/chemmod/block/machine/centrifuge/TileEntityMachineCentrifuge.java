@@ -1,8 +1,8 @@
-package com.bradcruz.chemmod.block.machine.boiler;
-
+package com.bradcruz.chemmod.block.machine.centrifuge;
 
 import com.bradcruz.chemmod.block.machine.TileEntityMachineBase;
-import net.minecraft.init.Items;
+import com.bradcruz.chemmod.block.machine.mixer.BlockMachineMixer;
+import com.bradcruz.chemmod.block.machine.mixer.RecipesMachineMixer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ITickable;
@@ -10,21 +10,23 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 
-public class TileEntityMachineBoiler extends TileEntityMachineBase implements ITickable {
+public class TileEntityMachineCentrifuge extends TileEntityMachineBase implements ITickable {
 
     @Override
     public ITextComponent getDisplayName() {
-        return this.hasCustomName() ? new TextComponentString(this.customName) : new TextComponentTranslation("container.machine_boiler");
+        return this.hasCustomName() ? new TextComponentString(this.customName) : new TextComponentTranslation("container.machine_centrifuge");
     }
+
 
     public void update() {
         if(this.isActive()) {
             --this.burnTime;
-            BlockMachineBoiler.setState(true, world, pos);
+            BlockMachineCentrifuge.setState(true, world, pos);
         }
         else if (!this.isActive() && !world.isRemote) {
-            BlockMachineBoiler.setState(false, world, pos);
+            BlockMachineCentrifuge.setState(false, world, pos);
         }
+
 
         ItemStack[] inputs = new ItemStack[] {handler.getStackInSlot(0), handler.getStackInSlot(1)};
         ItemStack fuel = this.handler.getStackInSlot(2);
@@ -51,14 +53,11 @@ public class TileEntityMachineBoiler extends TileEntityMachineBase implements IT
             if(cookTime == totalCookTime) {
                 inputs[0].shrink(1);
                 inputs[1].shrink(1);
-                ItemStack bucket = new ItemStack(Items.BUCKET);
-                handler.insertItem(1, bucket, false); //presumes water buckets not stackable
                 if(handler.getStackInSlot(3).getCount() > 0) {
-                    handler.getStackInSlot(3).grow(5);
+                    handler.getStackInSlot(3).grow(1);
                 }
                 else {
                     handler.insertItem(3, smelting, false);
-                    handler.getStackInSlot(3).grow(2);
                 }
 
                 smelting = ItemStack.EMPTY;
@@ -68,7 +67,7 @@ public class TileEntityMachineBoiler extends TileEntityMachineBase implements IT
         }
         else {
             if(this.canSmelt() && this.isActive()) {
-                ItemStack output = RecipesMachineBoiler.getInstance().getResult(inputs[0], inputs[1]);
+                ItemStack output = RecipesMachineCentrifuge.getInstance().getResult(inputs[0], inputs[1]);
                 if(!output.isEmpty()) {
                     smelting = output;
                     cookTime++;
@@ -82,14 +81,13 @@ public class TileEntityMachineBoiler extends TileEntityMachineBase implements IT
             else if(this.isActive() && !this.canSmelt()) {
                 cookTime = 0;
             }
-
         }
     }
 
     private boolean canSmelt() {
         if(((ItemStack)this.handler.getStackInSlot(0)).isEmpty() || ((ItemStack)this.handler.getStackInSlot(1)).isEmpty()) return false;
         else {
-            ItemStack result = RecipesMachineBoiler.getInstance().getResult((ItemStack)this.handler.getStackInSlot(0), (ItemStack)this.handler.getStackInSlot(1));
+            ItemStack result = RecipesMachineCentrifuge.getInstance().getResult((ItemStack)this.handler.getStackInSlot(0), (ItemStack)this.handler.getStackInSlot(1));
             if(result.isEmpty()) return false;
             else {
                 ItemStack output = (ItemStack)this.handler.getStackInSlot(3);
@@ -100,6 +98,4 @@ public class TileEntityMachineBoiler extends TileEntityMachineBase implements IT
             }
         }
     }
-
-
 }
