@@ -20,7 +20,7 @@ This is a work in progress modification for Minecraft. It aims to add cool boons
 * IntlliJ: "gradlew genIntellijRuns"
 * Build with "gradlew build"
 
-##### To Do:
+### To Do:
 * Add consumption sounds
 * Add machine sounds
 * Add lighting effects
